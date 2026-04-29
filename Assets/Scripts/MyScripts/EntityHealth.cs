@@ -48,8 +48,8 @@ public class EntityHealth : MonoBehaviour, IDamageable
 
     public void Heal(float healthAmount, float shieldAmount)
     {
-        Mathf.Clamp(currentHealth, currentHealth += healthAmount, maxHealth);
-        Mathf.Clamp(currentShield, currentShield += shieldAmount, maxShield);
+        currentHealth = Mathf.Min(currentHealth + healthAmount, maxHealth);
+        currentShield = Mathf.Min(currentShield + shieldAmount, maxShield);
 
         if (m_StateBlackboard != null) m_StateBlackboard.TriggerHeal(new Vector2(currentHealth, maxHealth), new Vector2(currentShield, maxShield));
     }
@@ -58,4 +58,6 @@ public class EntityHealth : MonoBehaviour, IDamageable
         Debug.Log($"{gameObject.name} has died.");
         // Logic for death (disable scripts, play anim, etc.)
     }
+    public Vector2 GetCurrentAndMaxHealth() => new Vector2(currentHealth, maxHealth);
+    public Vector2 GetCurrentAndMaxShield() => new Vector2(currentShield, maxShield);
 }

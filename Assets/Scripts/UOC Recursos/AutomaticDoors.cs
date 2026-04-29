@@ -32,12 +32,8 @@ public class AutomaticDoors : MonoBehaviour
             }
             else
             {
-                leftDoor.localPosition = Vector3.Lerp(leftDoor.localPosition, 
-                                                      leftOpenLocation.localPosition, 
-                                                      Time.deltaTime * speed);
-                rightDoor.localPosition = Vector3.Lerp(rightDoor.localPosition, 
-                                                       rightOpenLocation.localPosition, 
-                                                       Time.deltaTime * speed);
+                leftDoor.localPosition = Vector3.Lerp(leftDoor.localPosition, leftOpenLocation.localPosition, Time.deltaTime * speed);
+                rightDoor.localPosition = Vector3.Lerp(rightDoor.localPosition, rightOpenLocation.localPosition, Time.deltaTime * speed);
             }
         }
         else if (isClosing)
@@ -51,12 +47,8 @@ public class AutomaticDoors : MonoBehaviour
             }
             else
             {
-                leftDoor.localPosition = Vector3.Lerp(leftDoor.localPosition, 
-                                                      leftClosedLocation.localPosition, 
-                                                      Time.deltaTime * speed);
-                rightDoor.localPosition = Vector3.Lerp(rightDoor.localPosition, 
-                                                       rightClosedLocation.localPosition, 
-                                                       Time.deltaTime * speed);
+                leftDoor.localPosition = Vector3.Lerp(leftDoor.localPosition, leftClosedLocation.localPosition, Time.deltaTime * speed);
+                rightDoor.localPosition = Vector3.Lerp(rightDoor.localPosition, rightClosedLocation.localPosition, Time.deltaTime * speed);
             }
         }
     }

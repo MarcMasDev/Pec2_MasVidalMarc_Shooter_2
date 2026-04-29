@@ -17,7 +17,7 @@ public class EnemyFSM : MonoBehaviour
     public float rotationSpeed = 120f;
     private float rotatedSum = 0f;
 
-    // Referencias y variables privadas
+
     private NavMeshAgent agent;
     private EnemyInput virtualInput;
     private EnemySensors sensors;
@@ -84,6 +84,7 @@ public class EnemyFSM : MonoBehaviour
         }
     }
 
+    //ENTERS (cuando el enemigo entra al extado x)
     private void OnPatrolEnter()
     {
         agent.isStopped = false;
@@ -109,6 +110,8 @@ public class EnemyFSM : MonoBehaviour
         agent.ResetPath();
         agent.isStopped = false;
     }
+
+    //EXITS (cuando el enemigo sale del extado x)
     private void OnChaseExit()
     {
 
@@ -124,6 +127,7 @@ public class EnemyFSM : MonoBehaviour
         virtualInput.IsAiming = false;
     }
 
+    //Handles (updates de los estados)
     private void HandlePatrol()
     {
         if (sensors.CanSeePlayer()) { ChangeState(EnemyState.Chase); return; }
@@ -164,7 +168,7 @@ public class EnemyFSM : MonoBehaviour
         Transform target = sensors.GetPlayerTransform();
         if (target == null) { ChangeState(EnemyState.Search); return; }
 
-        // Mirar al objetivo
+        //Mirar al objetivo
         Vector3 direction = (target.position - transform.position).normalized;
         direction.y = 0;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * 5f);
@@ -185,22 +189,22 @@ public class EnemyFSM : MonoBehaviour
         }
     }
 
+    public void TriggerEnemyFootstep() => blackboard.TriggerFootstep(); 
 
-    // Gizmos:
     private void OnDrawGizmosSelected()
     {
-        // 1. Rango de Ataque (Círculo Rojo)
+        //Rango de Ataque (Círculo Rojo)
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        // 2. Línea hacia el destino actual del NavMesh
+        //Línea hacia el destino actual del NavMesh
         if (agent != null && agent.hasPath)
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawLine(transform.position, agent.destination);
         }
 
-        // 3. Visualización de los Waypoints de patrulla
+        //Visualización de los Waypoints de patrulla
         if (waypoints != null && waypoints.Length > 0)
         {
             Gizmos.color = Color.yellow;
@@ -208,10 +212,10 @@ public class EnemyFSM : MonoBehaviour
             {
                 if (waypoints[i] == null) continue;
 
-                // Esfera en el waypoint
+                //Esfera en el waypoint
                 Gizmos.DrawSphere(waypoints[i].position, 0.3f);
 
-                // Línea entre waypoints para ver la ruta
+                //Línea entre waypoints para ver la ruta
                 int nextIndex = (i + 1) % waypoints.Length;
                 if (waypoints[nextIndex] != null)
                 {
@@ -220,13 +224,13 @@ public class EnemyFSM : MonoBehaviour
             }
         }
 
-        // 4. Cono de visión (si tienes acceso a la script de sensores)
+        //Cono de visión (si tienes acceso a la script de sensores)
         if (sensors != null)
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(transform.position, sensors.viewRadius);
 
-            // Dibujar los límites del ángulo de visión
+            //Dibujar los límites del ángulo de visión
             Vector3 leftBoundary = Quaternion.Euler(0, -sensors.viewAngle / 2, 0) * transform.forward;
             Vector3 rightBoundary = Quaternion.Euler(0, sensors.viewAngle / 2, 0) * transform.forward;
 

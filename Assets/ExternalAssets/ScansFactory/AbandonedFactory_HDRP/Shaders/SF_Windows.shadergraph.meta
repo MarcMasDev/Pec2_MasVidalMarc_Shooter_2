@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 9fa3a49308e92ee4db07d9bd959a1fc1
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 164492
+  packageName: Abandoned Factory Buildings - Day/Night Scene
+  packageVersion: 1.6
+  assetPath: Assets/ScansFactory/AbandonedFactory_HDRP/Shaders/SF_Windows.shadergraph
+  uploadId: 821418

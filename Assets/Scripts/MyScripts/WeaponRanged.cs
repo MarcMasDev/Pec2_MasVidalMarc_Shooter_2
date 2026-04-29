@@ -141,4 +141,8 @@ public class WeaponRanged : Weapon, IReloadable
     {
         return new Vector2Int(currentAmmo, currentClips);
     }
+    public override void AddAmmo(int amount)
+    {
+        currentClips += amount;
+    }
 }

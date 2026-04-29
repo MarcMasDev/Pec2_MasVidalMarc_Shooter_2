@@ -1,8 +1,9 @@
 using UnityEngine;
 public interface IInteractable
 {
-    void Interact();
+    bool Interact(GameObject user);
     string GetInteractionText();
+
 }
 public class InteractionManager : MonoBehaviour
 {
@@ -23,9 +24,15 @@ public class InteractionManager : MonoBehaviour
 
             if (input.IsInteracting)
             {
-                interactUI.Show(""); //hide
-                currentInteractable.Interact();
-                currentInteractable = null;
+                //Intentamos interactuar y guardamos si funciona
+                bool success = currentInteractable.Interact(gameObject);
+
+                if (success)
+                {
+                    interactUI.Show(""); // Ocultar solo si funciona
+                    currentInteractable = null;
+                }
+                else interactUI.ShowTooltip("Not available");
             }
         }
         else interactUI.Show(""); //hide

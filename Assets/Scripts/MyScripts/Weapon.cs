@@ -81,14 +81,22 @@ public abstract class Weapon : MonoBehaviour
             Destroy(vfxInstance, vfxDestroyTime);
         }
     }
+
+
     public virtual Vector2Int GetCurrentAmmo()
     {
         return new Vector2Int(-1, -1);
     }
+
     public string GetWeaponName()
     {
         return weaponInfo.name;
     }
+    public int GetClipSize()
+    {
+        return weaponInfo.clipSize;
+    }
+
     private bool IsBloodAgent(Collider hit)
     {
         for (int i = 0; i < bloodTags.Length; i++)
@@ -97,9 +105,12 @@ public abstract class Weapon : MonoBehaviour
         }
         return false;
     }
+
     protected Ray GetRayOrigin()
     {
         if (isPlayer) return Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         else return new Ray(origin.position, origin.forward); ;
     }
+
+    public virtual void AddAmmo(int amount) { }
 }
