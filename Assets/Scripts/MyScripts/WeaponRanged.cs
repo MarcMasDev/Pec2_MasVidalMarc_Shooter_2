@@ -18,9 +18,11 @@ public class WeaponRanged : Weapon, IReloadable
     }
 
     // El inventory lo activa cada vez que el jugador dispara
-    public override void TryShoot()
+    public override void TryShoot(bool initCooldown = false)
     {
         if (m_StateBlackboard.m_IsPerformingAction || Time.time < nextFireTime || isFiring) return;
+
+        if (initCooldown) nextFireTime = Time.time + (1f / weaponInfo.fireRate);
 
         switch (weaponInfo.fireMode)
         {
@@ -108,7 +110,7 @@ public class WeaponRanged : Weapon, IReloadable
         m_StateBlackboard.TriggerFullAutoAttack(false);
     }
 
-    public void Reload()
+    public void Reload(bool useClip = true)
     {
         if (currentClips <= 0 || currentAmmo >= weaponInfo.clipSize) return;
         StopShooting();

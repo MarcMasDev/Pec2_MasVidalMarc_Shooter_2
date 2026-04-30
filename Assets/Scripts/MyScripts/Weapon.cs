@@ -3,7 +3,7 @@ using UnityEngine;
 
 public interface IReloadable
 {
-    void Reload();
+    void Reload(bool useClip = true);
     void StopReloading();
 }
 
@@ -28,9 +28,10 @@ public abstract class Weapon : MonoBehaviour
     protected float nextFireTime;
     protected bool isFiring;
     private bool isPlayer => CompareTag("Player");
-    public virtual void TryShoot()
+    public virtual void TryShoot(bool initCooldown = false)
     {
         if (weaponInfo == null || m_StateBlackboard.m_IsPerformingAction) return;
+        if (initCooldown) nextFireTime = Time.time + (1f / weaponInfo.fireRate);
 
         if (Time.time >= nextFireTime)
         {

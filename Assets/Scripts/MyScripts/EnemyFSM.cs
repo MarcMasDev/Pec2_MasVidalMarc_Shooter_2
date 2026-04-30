@@ -18,7 +18,8 @@ public class EnemyFSM : MonoBehaviour
     private float rotatedSum = 0f;
 
     [Header("Dissolve Settings")]
-    [SerializeField] private float dissolveDuration = 2f;
+    [SerializeField] private float dissolveDuration = 4f;
+    [SerializeField] private float dissolveDelay = 4f;
     private static readonly int DissolveProperty = Shader.PropertyToID("_DissolveAmount");
     private Renderer[] characterRenderers;
 
@@ -301,6 +302,7 @@ public class EnemyFSM : MonoBehaviour
 
         float elapsedTime = 0;
 
+        yield return new WaitForSeconds(dissolveDelay); //Esperamos a que haya pasado un tiempo (animación de morir, cuerpo en el suelo
         while (elapsedTime < dissolveDuration)
         {
             elapsedTime += Time.deltaTime;

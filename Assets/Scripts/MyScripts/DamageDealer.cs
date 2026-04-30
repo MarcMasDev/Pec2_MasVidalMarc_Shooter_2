@@ -26,7 +26,7 @@ public class DamageDealer : MonoBehaviour
             // Si el cargador está vacío, recarga automáticamente
             if (weapon.GetCurrentAmmo().x == 0)
             {
-                reloadable.Reload();
+                reloadable.Reload(false);
             }
         }
     }
