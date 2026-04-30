@@ -13,7 +13,7 @@ public class DamageZone : MonoBehaviour
         {
             time = timeBetweenDamage;
 
-            if ((damageOnlyPlayer && other.CompareTag("Player")) || !damageOnEntry) return;
+            if ((damageOnlyPlayer && !other.CompareTag("Player")) || !damageOnEntry) return;
 
             damageable.TakeDamage(damage);
         }
@@ -26,9 +26,8 @@ public class DamageZone : MonoBehaviour
             time = timeBetweenDamage; 
             if (other.TryGetComponent(out IDamageable damageable))
             {
-                if (damageOnlyPlayer && other.CompareTag("Player")) return;
-
-                damageable.TakeDamage(damage);
+                if (damageOnlyPlayer && other.CompareTag("Player")) damageable.TakeDamage(damage);
+                else if (!damageOnlyPlayer) damageable.TakeDamage(damage);
             }
         }
 

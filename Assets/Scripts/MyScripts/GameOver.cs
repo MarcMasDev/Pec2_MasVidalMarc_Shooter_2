@@ -22,14 +22,22 @@ public class GameOver : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         Time.timeScale = 0;
+
+        Cursor.lockState = CursorLockMode.None; //Desbloquea el cursor para que se mueva libremente
+        Cursor.visible = true; //Hace que el cursor sea visible
     }
 
     public void RestartGame()
     {
         Time.timeScale = 1;
+        // --- Reset del Cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         // Obtiene el índice de la escena actual y la vuelve a cargar
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
+
+
     }
 }
