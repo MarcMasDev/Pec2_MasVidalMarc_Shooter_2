@@ -42,7 +42,7 @@ AnimatorStateMachine:
     m_Position: {x: 210, y: -270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2014716734824791419}
-    m_Position: {x: -20, y: -110, z: 0}
+    m_Position: {x: -10, y: -110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8438269820193879547}
     m_Position: {x: -240, y: -210, z: 0}
@@ -201,7 +201,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Attack
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: IsShooting
+    m_ConditionEvent: AttackAuto
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2014716734824791419}
@@ -305,7 +305,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: IsShooting
+  - m_Name: AttackAuto
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -333,7 +333,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: IsShooting
+    m_ConditionEvent: AttackAuto
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3428290117838330085}
@@ -498,7 +498,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 48cb6d4c3f5f75a458e4864f231eb80c, type: 3}
+  m_Motion: {fileID: 7400000, guid: 37b566b042d85324f8b47bfc4771e82a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
