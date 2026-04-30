@@ -15,6 +15,7 @@ public class CharacterAudioManager : MonoBehaviour
             m_StateBlackboard.OnJump += PlayJumpSound;
             m_StateBlackboard.OnLand += PlayLandSound;
             m_StateBlackboard.OnHurt += PlayHurtSound;
+            m_StateBlackboard.OnDeath += PlayDeathSound;
         }
     }
 
@@ -26,6 +27,7 @@ public class CharacterAudioManager : MonoBehaviour
             m_StateBlackboard.OnJump -= PlayJumpSound;
             m_StateBlackboard.OnLand -= PlayLandSound;
             m_StateBlackboard.OnHurt -= PlayHurtSound;
+            m_StateBlackboard.OnDeath -= PlayDeathSound;
         }
     }
 
@@ -33,4 +35,5 @@ public class CharacterAudioManager : MonoBehaviour
     private void PlayJumpSound() => AudioManager.instance.PlayOneShootFromArray(audioItems, SoundType.Jump);
     private void PlayLandSound() => AudioManager.instance.PlayOneShootFromArray(audioItems, SoundType.Land);
     private void PlayHurtSound(Vector2 health, Vector2 shield) => AudioManager.instance.PlayOneShootFromArray(audioItems, SoundType.Hurt);
+    private void PlayDeathSound() => AudioManager.instance.PlayOneShootFromArray(audioItems, SoundType.Death);
 }

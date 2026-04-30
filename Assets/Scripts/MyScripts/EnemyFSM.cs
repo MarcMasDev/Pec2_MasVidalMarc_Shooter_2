@@ -17,6 +17,10 @@ public class EnemyFSM : MonoBehaviour
     public float rotationSpeed = 120f;
     private float rotatedSum = 0f;
 
+    [Header("Dissolve Settings")]
+    [SerializeField] private float dissolveDuration = 2f;
+    private static readonly int DissolveProperty = Shader.PropertyToID("_DissolveAmount");
+    private Renderer[] characterRenderers;
 
     private NavMeshAgent agent;
     private EnemyInput virtualInput;
@@ -24,18 +28,22 @@ public class EnemyFSM : MonoBehaviour
     [SerializeField] private CharacterBlackboard blackboard;
     public Transform[] waypoints;
     private int currentWaypointIndex = 0;
+    private bool isDeath = false;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         virtualInput = GetComponent<EnemyInput>();
         sensors = GetComponent<EnemySensors>();
+        characterRenderers = GetComponentsInChildren<Renderer>();
     }
+
 
     private void Start() => EnterState(currentState);
 
     private void Update()
     {
+        if (isDeath) return;
         if (blackboard != null)
             blackboard.SetNormalizedSpeed(agent.velocity.magnitude, agent.speed);
 
@@ -240,11 +248,77 @@ public class EnemyFSM : MonoBehaviour
     }
 
     //EVENTOS
-    private void OnEnable() { if (blackboard != null) blackboard.OnHurt += OnHurtBehavior; }
-    private void OnDisable() { if (blackboard != null) blackboard.OnHurt -= OnHurtBehavior; }
+    private void OnEnable() 
+    {
+        if (blackboard != null)
+        {
+            blackboard.OnHurt += OnHurtBehavior;
+            blackboard.OnDeath += OnDeathBehavior;
+        }
+    }
+    private void OnDisable()
+    {
+        if (blackboard != null)
+        {
+            blackboard.OnHurt -= OnHurtBehavior;
+            blackboard.OnDeath -= OnDeathBehavior;
+        }
+    }
     private void OnHurtBehavior(Vector2 health, Vector2 shield)
     {
         if (currentState != EnemyState.Chase && currentState != EnemyState.Attack)
             ChangeState(onHurtState);
+    }
+    private void OnDeathBehavior()
+    {
+        isDeath = true;
+
+        //Detener física
+        if (agent != null)
+        {
+            agent.isStopped = true;
+            agent.enabled = false;
+        }
+
+        //Desactivar Colision
+        if (TryGetComponent<Collider>(out var col)) col.enabled = false;
+
+
+        //Ejecutar la desaparición
+        StartCoroutine(DissolveRoutine());
+    }
+
+    private IEnumerator DissolveRoutine()
+    {
+        //En HDRP, si el material no tenía el clipping activo, esto lo fuerza
+        foreach (Renderer r in characterRenderers)
+        {
+            if (r != null)
+            {
+                r.material.EnableKeyword("_ALPHATEST_ON");
+            }
+        }
+
+        float elapsedTime = 0;
+
+        while (elapsedTime < dissolveDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float lerpTarget = Mathf.Clamp01(elapsedTime / dissolveDuration);
+
+            foreach (Renderer r in characterRenderers)
+            {
+                if (r != null)
+                {
+                    //Al usar .material (y no .sharedMaterial) creamos una instancia única del material para cada enemigo.
+                    r.material.SetFloat(DissolveProperty, lerpTarget);
+                }
+            }
+
+            yield return null;
+        }
+
+        //Finalmente destruimos el objeto
+        Destroy(gameObject);
     }
 }

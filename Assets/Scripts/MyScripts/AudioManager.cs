@@ -8,7 +8,8 @@ public enum SoundType
     Hurt,
     shoot,
     reload,
-    emptyShoot
+    emptyShoot,
+    Death
 }
 
 [System.Serializable]

@@ -55,8 +55,7 @@ public class EntityHealth : MonoBehaviour, IDamageable
     }
     private void Die()
     {
-        Debug.Log($"{gameObject.name} has died.");
-        // Logic for death (disable scripts, play anim, etc.)
+        m_StateBlackboard.TriggerDeath();
     }
     public Vector2 GetCurrentAndMaxHealth() => new Vector2(currentHealth, maxHealth);
     public Vector2 GetCurrentAndMaxShield() => new Vector2(currentShield, maxShield);
