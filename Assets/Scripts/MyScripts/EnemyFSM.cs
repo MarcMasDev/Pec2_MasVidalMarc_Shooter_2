@@ -30,6 +30,7 @@ public class EnemyFSM : MonoBehaviour
     public Transform[] waypoints;
     private int currentWaypointIndex = 0;
     private bool isDeath = false;
+    [SerializeField] private bool flying = false;
 
     private void Awake()
     {
@@ -280,6 +281,9 @@ public class EnemyFSM : MonoBehaviour
             agent.isStopped = true;
             agent.enabled = false;
         }
+
+        //solo para que puedan caer los enemigos voladores, si no, sobreescribe la física
+        if (flying) GetComponent<Animator>().applyRootMotion = false;
 
         //Desactivar Colision
         if (TryGetComponent<Collider>(out var col)) col.enabled = false;

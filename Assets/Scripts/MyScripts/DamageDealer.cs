@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class DamageDealer : MonoBehaviour
@@ -7,7 +8,15 @@ public class DamageDealer : MonoBehaviour
 
     [Header("Equipamiento")]
     [SerializeField] private Weapon weapon;
+    private void OnEnable()
+    {
+        m_StateBlackboard.OnDeath += Disable;
+    }
 
+    private void OnDisable()
+    {
+        m_StateBlackboard.OnDeath -= Disable;
+    }
     private void Update()
     {
         if (weapon == null) return;
@@ -32,4 +41,6 @@ public class DamageDealer : MonoBehaviour
     }
 
     public Weapon GetActiveWeapon() => weapon;
+
+    private void Disable() => enabled = false;
 }

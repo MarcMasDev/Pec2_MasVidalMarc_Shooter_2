@@ -20,4 +20,4 @@ MonoBehaviour:
   burstCount: 3
   clipSize: 15
   maxClips: 25
-  damage: 10
+  damage: 5

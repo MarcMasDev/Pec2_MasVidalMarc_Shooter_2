@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class AutomaticDoors : MonoBehaviour
 {
@@ -16,9 +17,9 @@ public class AutomaticDoors : MonoBehaviour
 
     bool isOpening = false;
     bool isClosing = false;
+    bool enableNavmesh = false;
     
     Vector3 distance;
-
     void Update ()
     {
         if (isOpening)
@@ -79,6 +80,12 @@ public class AutomaticDoors : MonoBehaviour
         {
             if(keyNeeded != null) keyNeeded.SetActive(false);
             return;
+        }
+        if (!enableNavmesh)
+        {
+            enableNavmesh = true;
+            leftDoor.GetComponent<NavMeshObstacle>().enabled = false;
+            rightDoor.GetComponent<NavMeshObstacle>().enabled = false;
         }
 
         isClosing = true;

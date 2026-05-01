@@ -8,13 +8,16 @@ public class EntityHealth : MonoBehaviour, IDamageable
     [SerializeField] private CharacterBlackboard m_StateBlackboard;
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float maxShield = 100f;
+    [SerializeField] private float startShield = 100f;
     [SerializeField] [Range(0,1)] private float shieldProtection = 0.75f;
     private float currentHealth;
-    private float currentShield;
+   private float currentShield;
 
     private void Start()
     {
-        Heal(maxHealth, maxShield); //Updates UI and sets init values
+        startShield = Mathf.Min(maxShield, startShield);
+
+        Heal(maxHealth, startShield); //Updates UI and sets init values
     }
 
     public void TakeDamage(float amount)
@@ -24,6 +27,7 @@ public class EntityHealth : MonoBehaviour, IDamageable
         float damageToShield = amount * shieldProtection;
         float damageToHealth = amount - damageToShield;
 
+        //SHIELD
         if (currentShield > 0)
         {
             if (currentShield >= damageToShield) currentShield -= damageToShield;
@@ -33,7 +37,7 @@ public class EntityHealth : MonoBehaviour, IDamageable
                 currentShield = 0;
                 damageToHealth += overflow;
             }
-        }
+        } //---
         else damageToHealth = amount;
 
         currentHealth -= damageToHealth;

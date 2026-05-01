@@ -19,5 +19,5 @@ MonoBehaviour:
   fireRate: 10
   burstCount: 3
   clipSize: 25
-  maxClips: 120
+  maxClips: 0
   damage: 10

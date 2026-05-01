@@ -5,7 +5,6 @@ public class WeaponRanged : Weapon, IReloadable
 {
     [Header("Ranged Specifics")]
     [SerializeField] private ParticleSystem muzzleFlash;
-    [SerializeField] private float destroyTime = 10f;
 
     private int currentAmmo;
     private int currentClips;
@@ -115,6 +114,9 @@ public class WeaponRanged : Weapon, IReloadable
         if (currentClips <= 0 || currentAmmo >= weaponInfo.clipSize) return;
         StopShooting();
         DisableInput();
+
+        if (!useClip) currentClips++;
+
         m_StateBlackboard.TriggerReload();
     }
     public void ExecuteReloadAudio()

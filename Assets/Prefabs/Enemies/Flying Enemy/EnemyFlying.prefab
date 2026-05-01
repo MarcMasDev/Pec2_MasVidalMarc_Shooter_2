@@ -219,7 +219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4448608598208771812}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15784778, y: -0.000000063446635, z: 0.0000004844623, w: 0.9874634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.36674118, z: -0.0017508864}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1926,6 +1926,7 @@ MonoBehaviour:
   m_StateBlackboard: {fileID: 8222186445424466170}
   maxHealth: 50
   maxShield: 0
+  startShield: 100
   shieldProtection: 0.75
 --- !u!65 &1930139932478431897
 BoxCollider:
@@ -2027,6 +2028,7 @@ MonoBehaviour:
   - {fileID: 370304149058833417}
   - {fileID: 5308402252013098881}
   - {fileID: 4682157090783574352}
+  flying: 0
 --- !u!114 &877970930097999285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2065,7 +2067,6 @@ MonoBehaviour:
     m_Bits: 183
   origin: {fileID: 2866574287440480048}
   muzzleFlash: {fileID: 5566397670009996602}
-  destroyTime: 10
 --- !u!114 &2097500035423447177
 MonoBehaviour:
   m_ObjectHideFlags: 0

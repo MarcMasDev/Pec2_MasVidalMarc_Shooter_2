@@ -1,12 +1,16 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // Necesario para cargar escenas
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class GameOver : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject winScreen;
     [SerializeField] private CharacterBlackboard player;
     [SerializeField] private Button restartButton;
+
+    //Win = all enemies death
+    private List<CharacterBlackboard> m_ActiveEnemies = new List<CharacterBlackboard>();
 
     private void OnEnable()
     {
@@ -17,16 +21,52 @@ public class GameOver : MonoBehaviour
     {
         player.OnDeath -= GameOverTrigger;
         restartButton.onClick.RemoveListener(RestartGame);
+
+        foreach (var enemy in m_ActiveEnemies) enemy.OnDeath -= () => OnEnemyDied(enemy);
     }
+    private void Start()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            m_ActiveEnemies.Add(enemies[i].GetComponent<CharacterBlackboard>());
+        }
+    }
+    public void RegisterEnemy(CharacterBlackboard enemy)
+    {
+        m_ActiveEnemies.Add(enemy);
+        // Subscribe to that specific enemy's death
+        enemy.OnDeath += () => OnEnemyDied(enemy);
+    }
+
+    private void OnEnemyDied(CharacterBlackboard enemy)
+    {
+        m_ActiveEnemies.Remove(enemy);
+
+        if (m_ActiveEnemies.Count <= 0)
+        {
+            WinScreenTrigger();
+        }
+    }
+
     private void GameOverTrigger()
     {
         gameOverScreen.SetActive(true);
-        Time.timeScale = 0;
+        EnableMenuControlInput();
+    }
 
+    private void WinScreenTrigger()
+    {
+        winScreen.SetActive(true);
+        EnableMenuControlInput();
+    }
+
+    private void EnableMenuControlInput()
+    {
+        Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None; //Desbloquea el cursor para que se mueva libremente
         Cursor.visible = true; //Hace que el cursor sea visible
     }
-
     public void RestartGame()
     {
         Time.timeScale = 1;
