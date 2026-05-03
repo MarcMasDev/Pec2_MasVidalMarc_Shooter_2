@@ -640,7 +640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2304016543198502010
 Transform:
   m_ObjectHideFlags: 0
@@ -1119,7 +1119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4586382871021437452
 Transform:
   m_ObjectHideFlags: 0
@@ -1901,7 +1901,7 @@ Light:
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 9449
+  m_ColorTemperature: 7913
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: -0, y: -1, z: 0.00099947, w: 0.97427857}
   m_UseBoundingSphereOverride: 0
@@ -4845,6 +4845,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.443
       objectReference: {fileID: 0}
+    - target: {fileID: 7063842503395157365, guid: 8f888c1f7dcd8df448a0487b25fcc781, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0006
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063842503395157365, guid: 8f888c1f7dcd8df448a0487b25fcc781, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.054
+      objectReference: {fileID: 0}
     - target: {fileID: 8013368262059994512, guid: 8f888c1f7dcd8df448a0487b25fcc781, type: 3}
       propertyPath: m_Name
       value: Flaslight
@@ -6818,9 +6826,6 @@ PrefabInstance:
       addedObject: {fileID: 9144105525126039374}
     - targetCorrespondingSourceObject: {fileID: 1170339376308916, guid: 87109e39fc1c2fe45955415c04b02e82, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3532869650036312295}
-    - targetCorrespondingSourceObject: {fileID: 1170339376308916, guid: 87109e39fc1c2fe45955415c04b02e82, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6041428270490372245}
   m_SourcePrefab: {fileID: 100100000, guid: 87109e39fc1c2fe45955415c04b02e82, type: 3}
 --- !u!4 &4756392733591729898 stripped
@@ -6846,18 +6851,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterAnimationManager
   m_StateBlackboard: {fileID: 4364375728644418872}
---- !u!114 &3532869650036312295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4758196925748404042}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 974734e407e721e4e9ab6b10a5f252ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!114 &6041428270490372245
 MonoBehaviour:
   m_ObjectHideFlags: 0

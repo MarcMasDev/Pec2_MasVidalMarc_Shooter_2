@@ -31,6 +31,7 @@ public class EnemyFSM : MonoBehaviour
     private int currentWaypointIndex = 0;
     private bool isDeath = false;
     [SerializeField] private bool flying = false;
+    public bool forceChase = false;
 
     private void Awake()
     {
@@ -41,7 +42,10 @@ public class EnemyFSM : MonoBehaviour
     }
 
 
-    private void Start() => EnterState(currentState);
+    private void Start()
+    {
+        EnterState(currentState);
+    }
 
     private void Update()
     {
@@ -164,13 +168,25 @@ public class EnemyFSM : MonoBehaviour
     private void HandleChase()
     {
         Transform target = sensors.GetPlayerTransform();
-        if (target == null) { ChangeState(EnemyState.Search); return; }
+        if (target == null) 
+        {
+            if (forceChase)
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                if (player != null) target = player.transform;
+            }
+            else
+            {
+                ChangeState(EnemyState.Search);
+                return;
+            }
+        }
 
         agent.SetDestination(target.position);
 
         float distance = Vector3.Distance(transform.position, target.position);
         if (distance <= attackRange && sensors.CanSeePlayer()) ChangeState(EnemyState.Attack);
-        else if (!sensors.CanSeePlayer() && !sensors.CanHearPlayer()) ChangeState(EnemyState.Search);
+        else if (!sensors.CanSeePlayer() && !sensors.CanHearPlayer() && !forceChase) ChangeState(EnemyState.Search);
     }
 
     private void HandleAttack()

@@ -111,11 +111,12 @@ public class WeaponRanged : Weapon, IReloadable
 
     public void Reload(bool useClip = true)
     {
+        if (!useClip) currentClips++;
         if (currentClips <= 0 || currentAmmo >= weaponInfo.clipSize) return;
         StopShooting();
         DisableInput();
 
-        if (!useClip) currentClips++;
+
 
         m_StateBlackboard.TriggerReload();
     }

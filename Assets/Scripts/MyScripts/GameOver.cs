@@ -8,6 +8,7 @@ public class GameOver : MonoBehaviour
     [SerializeField] private GameObject winScreen;
     [SerializeField] private CharacterBlackboard player;
     [SerializeField] private Button restartButton;
+    [SerializeField] private bool winEnabled = true;
 
     //Win = all enemies death
     private List<CharacterBlackboard> m_ActiveEnemies = new List<CharacterBlackboard>();
@@ -57,6 +58,8 @@ public class GameOver : MonoBehaviour
 
     private void WinScreenTrigger()
     {
+        if (!winEnabled) return;
+
         winScreen.SetActive(true);
         EnableMenuControlInput();
     }
