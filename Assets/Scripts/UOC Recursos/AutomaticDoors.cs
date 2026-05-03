@@ -32,7 +32,7 @@ public class AutomaticDoors : MonoBehaviour
     }
     private void HandleKeyCollected(string id)
     {
-        hasBeenUnlocked = id == doorID;
+        if (id == doorID) hasBeenUnlocked = true;
     }
 
     void Update ()

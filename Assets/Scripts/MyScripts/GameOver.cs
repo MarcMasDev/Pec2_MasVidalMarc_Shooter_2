@@ -23,9 +23,15 @@ public class GameOver : MonoBehaviour
         player.OnDeath -= GameOverTrigger;
         restartButton.onClick.RemoveListener(RestartGame);
 
-        foreach (var enemy in m_ActiveEnemies) enemy.OnDeath -= () => OnEnemyDied(enemy);
+        if (m_ActiveEnemies != null)
+        {
+            foreach (var enemy in m_ActiveEnemies)
+            {
+                if (enemy != null) enemy.OnDeath -= () => OnEnemyDied(enemy);
+            }
+        }
     }
-    private void Start()
+    private void Awake()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         for (int i = 0; i < enemies.Length; i++)

@@ -536,8 +536,8 @@ MonoBehaviour:
   - {fileID: 1217863556}
   - {fileID: 385326198}
   - {fileID: 274725483}
-  minSpawnTime: 3
-  maxSpawnTime: 5
+  minSpawnTime: 5
+  maxSpawnTime: 10
   isSpawning: 1
 --- !u!1 &82890142
 GameObject:
@@ -1522,7 +1522,6 @@ MonoBehaviour:
   m_Script: {fileID: 1172956839}
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.HighDefinition.Runtime::UnityEngine.Rendering.HighDefinition.SceneObjectIDMapSceneAsset
-  m_Entries: []
 --- !u!4 &369932482
 Transform:
   m_ObjectHideFlags: 19
