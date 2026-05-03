@@ -1,4 +1,4 @@
-# 🎮 PEC2 – First Person Shooter
+# PEC2 – First Person Shooter
 ### Marc Mas Vidal, Programació en Unity 3D, 03/05/2026
 
 > Joc de trets en primera persona desenvolupat en **Unity 6 (6000.0.38f1 LTS)** amb **HDRP** (High Definition Render Pipeline). El jugador ha de superar dos zones de joc ben diferenciades: una fàbrica abandonada que conté interiors y exteriors, enfrontant-se a enemics, i sobrevivint amb un sistema de vida i escut. L'objectiu es matar a tots els enemics del nivell.
