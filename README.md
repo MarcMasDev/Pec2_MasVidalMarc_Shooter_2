@@ -5,17 +5,6 @@
 
 ---
 
-## Taula de continguts
-
-1. [Instruccions per executar el projecte](#1-instruccions-per-executar-el-projecte)
-2. [Controls del joc](#2-controls-del-joc)
-3. [Vídeo de gameplay](#3-vídeo-de-gameplay)
-4. [Estructura de dades](#4-estructura-de-dades)
-5. [Arquitectura del codi — Scripts propis](#5-arquitectura-del-codi--scripts-propis)
-6. [Descripció del treball realitzat](#6-descripció-del-treball-realitzat)
-
----
-
 ## 1. Instruccions per executar el projecte
 
 ### Requisits previs
@@ -29,13 +18,11 @@ Git LFS: Recomanat (el projecte conté assets pesats)
 
 ### Passos per clonar i obrir el projecte
 
-# 1. Clona el repositori
-git clone https://github.com/MarcMasDev/Pec2_MasVidalMarc_Shooter_2.git
-
-# 2. Obre Unity Hub
-# 3. Fes clic a "Add project from disk" i selecciona la carpeta clonada
-# 4. Selecciona la versió Unity 6000.0.38f1 LTS
-# 5. Espera que Unity importi tots els assets
+1. Clona el repositori
+2. Obre Unity Hub
+3. Fes clic a "Add project from disk" i selecciona la carpeta clonada
+4. Selecciona la versió Unity 6000.0.38f1 LTS
+5. Espera que Unity importi tots els assets
 
 
 ### Obrir l'escena principal
