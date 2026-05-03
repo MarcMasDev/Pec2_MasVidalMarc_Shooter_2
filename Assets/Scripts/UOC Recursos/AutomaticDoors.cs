@@ -12,14 +12,29 @@ public class AutomaticDoors : MonoBehaviour
     public Transform rightOpenLocation;
 
     public float speed = 1.0f;
-    public Key key = null;
+    public string doorID;
     public GameObject keyNeeded;
 
     bool isOpening = false;
     bool isClosing = false;
     bool enableNavmesh = false;
-    
+    bool hasBeenUnlocked = false;
     Vector3 distance;
+
+    private void OnEnable()
+    {
+        Key.OnKeyCollected += HandleKeyCollected;
+    }
+
+    private void OnDisable()
+    {
+        Key.OnKeyCollected -= HandleKeyCollected;
+    }
+    private void HandleKeyCollected(string id)
+    {
+        hasBeenUnlocked = id == doorID;
+    }
+
     void Update ()
     {
         if (isOpening)
@@ -56,9 +71,9 @@ public class AutomaticDoors : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (key == null || !key.grabbed)
+        if (!hasBeenUnlocked)
         {
-            if (keyNeeded != null) keyNeeded.SetActive(true);
+            if (keyNeeded != null && col.CompareTag("Player")) keyNeeded.SetActive(true);
             return;
         }
 
@@ -68,7 +83,7 @@ public class AutomaticDoors : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (key == null || !key.grabbed) return;
+        if (!hasBeenUnlocked) return;
 
         isOpening = true;
         isClosing = false;
@@ -76,7 +91,7 @@ public class AutomaticDoors : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (key == null || !key.grabbed)
+        if (!hasBeenUnlocked && col.CompareTag("Player"))
         {
             if(keyNeeded != null) keyNeeded.SetActive(false);
             return;
